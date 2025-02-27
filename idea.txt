@@ -1,0 +1,39 @@
+Idea
+- A video streaming service where the content is embedded YouTube videos. A single home page where all the videos thumbnails and titles are listed, divided into sections for categories.
+
+Functionality
+- Clicking on individual video item takes you to a details screen, where the video autoplays
+- Details screen has a grid of videos based on simliar criteria at the bottom
+- CSS animation resize and autoplay on card hover no sound
+
+UI
+- Hero: autoplay carousel looping through selected database items
+- 3:5 ratio cards for categories, animate to 16:9 ratio, maintaining height
+
+Add-ons
+- Native, custom ad block to prevent ads from playing before videos, as well as certain browsers from asking you to verify age or log in
+- Screen where you paste YouTube URL and get title, channel name, duration, thumbnail in JSON format, copy to clipboard, so I can paste in JSON database
+
+JSON database schema
+- We'll use separate JSON files for each video category which will populate different sections of the home page
+- One file for the hero section, and one for each of the categories
+
+Stack
+- Custom HTML (explained below)
+- Custom CSS (explained below) will need responsiveness, grid and CSS animations
+- Javascript will:
+    1. Fetch from JSON, loop through each item, and generate innerHTML for each of the sections (will instruct)
+    2. Fetch YouTube video title, thumbnail, duration, channel name, generate JSON based on the schema, copy to clipboard
+    3. Create custom ad block
+- JSON for database (explained above)
+
+HTML architecture and hierarchy
+- wrapper that contains all elements (padding: 0, 16px) - grid or flex, row, no gaps,
+- section element (padding: 40px, 0) to separate different sections
+- div class container (max-width: 1280px) to contain and organize elements for that section. can be flex or grid, can be row or column, 16px gap
+- grid or flex row and column classes to apply to "container" (example: div class="container column")
+- div class card (grid, row, gap 16px, border radius 16px cutting off the content) card uses video thumbnail as background image. when hovered, resizes with animation, embed video autoplays, no sound, when hovered over
+- div class area (no cosmetics, serves as sensitive, clickable area, when mouse hovers over, triggering autoplay, animation, and clicking navigates you details page for the embedded video)
+
+Deploy
+- GitHub pages

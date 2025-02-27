@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: sans-serif;
+}
+
+.wrapper {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+}
+section {
+    padding: 40px 0;
+}
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    gap: 16px;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    padding: 8px;
+    width: 100%;
+    max-width: 400px;
+    resize: vertical;
+}
+button {
+    padding: 8px 16px;
+    margin: 8px 8px 8px 0;
+}
+#json-output {
+    background: #f0f0f0;
+    padding: 16px;
+    white-space: pre-wrap;
+}

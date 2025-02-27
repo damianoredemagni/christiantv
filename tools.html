@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Add Videos</title>
+        <link rel="stylesheet" href="tools.css" />
+    </head>
+    <body>
+        <div class="wrapper">
+            <section>
+                <div class="container column">
+                    <h2>Add Videos</h2>
+                    <textarea
+                        id="youtube-urls"
+                        placeholder="Paste YouTube URLs (one per line)"
+                        rows="5"
+                    ></textarea>
+                    <button onclick="generateVideoJSON()">Generate JSON</button>
+                    <button id="copy-json" onclick="copyJSON()" disabled>
+                        Copy to Clipboard
+                    </button>
+                    <pre id="json-output"></pre>
+                    <a href="index.html">Back to Home</a>
+                </div>
+            </section>
+        </div>
+        <script src="tools.js"></script>
+    </body>
+</html>

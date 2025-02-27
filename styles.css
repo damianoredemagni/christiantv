@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: sans-serif;
+}
+
+.wrapper {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+}
+section {
+    padding: 40px 0;
+}
+.container {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    white-space: nowrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hero Section */
+#hero .container {
+    width: 100%;
+    padding: 0;
+}
+#hero .card {
+    width: 100vw;
+    height: calc(100vw * 9 / 16); /* 16:9 ratio, scales with width */
+    max-height: 720px; /* Cap for large screens */
+    background-size: cover;
+    position: relative;
+    flex-shrink: 0;
+}
+#hero .card iframe {
+    width: 100%;
+    height: 100%;
+}
+#hero .area {
+    z-index: 2;
+}
+#hero .info {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 3;
+    color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+#hero .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    z-index: 3;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#hero .play-button::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 20px solid black;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    margin-left: 5px;
+}
+
+/* Regular Cards */
+.card {
+    height: 400px;
+    width: calc(400px * 3 / 5);
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+}
+.card:hover {
+    width: calc(400px * 16 / 9);
+}
+.card iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    position: absolute;
+    z-index: 1;
+}
+.area {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .card {
+        height: 200px;
+        width: calc(200px * 3 / 5);
+    }
+    .card:hover {
+        width: calc(200px * 16 / 9);
+    }
+}
