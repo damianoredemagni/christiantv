@@ -11,16 +11,18 @@
             <section>
                 <div class="container column">
                     <h2>Add Videos</h2>
-                    <textarea
-                        id="youtube-urls"
-                        placeholder="Paste YouTube URLs (one per line)"
-                        rows="5"
-                    ></textarea>
-                    <button onclick="generateVideoJSON()">Generate JSON</button>
+                    <div class="input-row">
+                        <input
+                            id="youtube-url"
+                            type="text"
+                            placeholder="Paste YouTube URL"
+                        />
+                        <button onclick="addVideo()">Add</button>
+                    </div>
+                    <div id="video-list"></div>
                     <button id="copy-json" onclick="copyJSON()" disabled>
-                        Copy to Clipboard
+                        Copy JSON
                     </button>
-                    <pre id="json-output"></pre>
                     <a href="index.html">Back to Home</a>
                 </div>
             </section>

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(`Failed to fetch ${jsonPath}: ${res.status}`);
       const videos = await res.json();
       const container = document.querySelector(`#${sectionId} .container`);
-      const isMobile = window.innerWidth <= 768; // Detect mobile
+      const isMobile = window.innerWidth <= 768;
       const isHero = sectionId === "hero";
 
       container.innerHTML = videos

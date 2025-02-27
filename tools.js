@@ -1,46 +1,67 @@
 document.addEventListener("DOMContentLoaded", () => {
-  async function generateVideoJSON() {
-    const textarea = document.getElementById("youtube-urls");
-    if (!textarea) {
-      console.error('Textarea with ID "youtube-urls" not found');
+  let videos = [];
+
+  async function addVideo() {
+    const urlInput = document.getElementById("youtube-url");
+    const url = urlInput.value.trim();
+    if (!url) return;
+
+    const videoId = url.match(/(?:v=)([^&]+)/)?.[1];
+    if (!videoId) {
+      alert("Invalid YouTube URL");
       return;
     }
-    const urls = textarea.value.split("\n").filter((url) => url.trim());
-    const videoData = [];
 
-    for (const url of urls) {
-      const videoId = url.match(/(?:v=)([^&]+)/)?.[1];
-      if (!videoId) {
-        console.warn(`Invalid URL skipped: ${url}`);
-        continue;
-      }
+    try {
+      const res = await fetch(
+        `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`,
+      );
+      if (!res.ok) throw new Error("Failed to fetch video data");
+      const data = await res.json();
 
-      try {
-        const res = await fetch(
-          `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`,
-        );
-        const data = await res.json();
-        data.video_id = videoId;
-        data.thumbnail_url = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`; // Override with higher res
-        videoData.push(data);
-      } catch (e) {
-        console.error(`Failed to fetch oEmbed for ${videoId}: ${e}`);
-      }
+      data.video_id = videoId;
+      videos.push(data);
+      urlInput.value = "";
+      renderVideoList();
+      document.getElementById("copy-json").disabled = false;
+    } catch (e) {
+      console.error(`Error fetching video ${videoId}: ${e}`);
+      alert("Failed to add video");
     }
+  }
 
-    const jsonString = JSON.stringify(videoData, null, 2);
-    document.getElementById("json-output").textContent = jsonString;
-    document.getElementById("copy-json").disabled = !jsonString;
+  function removeVideo(index) {
+    videos.splice(index, 1);
+    renderVideoList();
+    document.getElementById("copy-json").disabled = videos.length === 0;
+  }
+
+  function renderVideoList() {
+    const list = document.getElementById("video-list");
+    list.innerHTML = videos
+      .map(
+        (v, index) => `
+      <div class="video-row">
+        <img src="${v.thumbnail_url}" alt="${v.title}">
+        <div class="details">
+          <h3>${v.title}</h3>
+          <p>${v.author_name}</p>
+        </div>
+        <span class="remove" onclick="removeVideo(${index})">Remove</span>
+      </div>
+    `,
+      )
+      .join("");
   }
 
   function copyJSON() {
-    const jsonString = document.getElementById("json-output").textContent;
-    if (jsonString) {
-      navigator.clipboard.writeText(jsonString);
+    const jsonString = JSON.stringify(videos, null, 2);
+    navigator.clipboard.writeText(jsonString).then(() => {
       alert("JSON copied to clipboard!");
-    }
+    });
   }
 
-  window.generateVideoJSON = generateVideoJSON;
+  window.addVideo = addVideo;
+  window.removeVideo = removeVideo;
   window.copyJSON = copyJSON;
 });

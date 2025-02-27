@@ -16,6 +16,7 @@ section {
     padding: 40px 0;
 }
 .container {
+    width: 100%;
     max-width: 1280px;
     margin: 0 auto;
     gap: 16px;
@@ -25,18 +26,50 @@ section {
     flex-direction: column;
 }
 
-textarea {
+.input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+#youtube-url {
     padding: 8px;
-    width: 100%;
+    flex: 1;
     max-width: 400px;
-    resize: vertical;
 }
 button {
     padding: 8px 16px;
-    margin: 8px 8px 8px 0;
+    cursor: pointer;
 }
-#json-output {
-    background: #f0f0f0;
-    padding: 16px;
-    white-space: pre-wrap;
+#copy-json {
+    margin: 16px 0;
+}
+#copy-json:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.video-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+.video-row img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+}
+.video-row .details {
+    flex: 1;
+}
+.video-row .remove {
+    color: red;
+    cursor: pointer;
 }
