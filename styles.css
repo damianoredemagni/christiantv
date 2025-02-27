@@ -33,9 +33,9 @@ section {
     padding: 0;
 }
 #hero .card {
-    width: 100vw;
-    height: calc(100vw * 9 / 16); /* 16:9 ratio, scales with width */
-    max-height: 720px; /* Cap for large screens */
+    width: 100vw; /* Back to working vw */
+    height: calc(100vw * 3 / 7); /* 7:3 ratio */
+    max-height: 720px;
     background-size: cover;
     position: relative;
     flex-shrink: 0;
@@ -43,6 +43,7 @@ section {
 #hero .card iframe {
     width: 100%;
     height: 100%;
+    z-index: 1;
 }
 #hero .area {
     z-index: 2;
@@ -55,30 +56,8 @@ section {
     color: white;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 }
-#hero .play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    z-index: 3;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-#hero .play-button::before {
-    content: "";
-    display: block;
-    width: 0;
-    height: 0;
-    border-left: 20px solid black;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    margin-left: 5px;
+#hero .card.playing .info {
+    display: none;
 }
 
 /* Regular Cards */

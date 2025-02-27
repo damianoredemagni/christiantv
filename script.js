@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
           (v) => `
         <div class="card" style="background-image: url(${v.thumbnail_url})">
           <div class="area" data-video="${v.video_id || v.html.match(/embed\/([^?]+)/)[1]}" data-title="${v.title}"
-               ${isHero ? "" : 'onmouseenter="playVideo(this)" onmouseleave="stopVideo(this)"'}
+               onmouseenter="playVideo(this)" onmouseleave="stopVideo(this)"
                onclick="goToDetails('${v.video_id || v.html.match(/embed\/([^?]+)/)[1]}')"></div>
           ${
             isHero
@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
               <h2>${v.title}</h2>
               <p>${v.author_name}</p>
             </div>
-            <div class="play-button" onclick="playHeroVideo(this)"></div>
           `
               : ""
           }
