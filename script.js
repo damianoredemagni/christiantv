@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(`Failed to fetch ${jsonPath}: ${res.status}`);
       const videos = await res.json();
       const container = document.querySelector(`#${sectionId} .container`);
+      const isMobile = window.innerWidth <= 768; // Detect mobile
       const isHero = sectionId === "hero";
 
       container.innerHTML = videos
@@ -13,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
           (v) => `
         <div class="card" style="background-image: url(${v.thumbnail_url})">
           <div class="area" data-video="${v.video_id || v.html.match(/embed\/([^?]+)/)[1]}" data-title="${v.title}"
-               onmouseenter="playVideo(this)" onmouseleave="stopVideo(this)"
+               ${isMobile ? "" : 'onmouseenter="playVideo(this)" onmouseleave="stopVideo(this)"'}
                onclick="goToDetails('${v.video_id || v.html.match(/embed\/([^?]+)/)[1]}')"></div>
           ${
             isHero

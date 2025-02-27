@@ -33,8 +33,8 @@ section {
     padding: 0;
 }
 #hero .card {
-    width: 100vw; /* Back to working vw */
-    height: calc(100vw * 3 / 7); /* 7:3 ratio */
+    width: 100vw;
+    height: calc(100vw * 3 / 7);
     max-height: 720px;
     background-size: cover;
     position: relative;
@@ -96,6 +96,6 @@ section {
         width: calc(200px * 3 / 5);
     }
     .card:hover {
-        width: calc(200px * 16 / 9);
-    }
+        width: calc(200px * 3 / 5);
+    } /* No resize on mobile */
 }
