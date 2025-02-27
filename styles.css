@@ -5,6 +5,8 @@
 }
 body {
     font-family: sans-serif;
+    background-color: black;
+    color: white;
 }
 
 .wrapper {
@@ -33,7 +35,7 @@ section {
     padding: 0;
 }
 #hero .card {
-    width: 100vw;
+    width: 100%;
     height: calc(100vw * 3 / 7);
     max-height: 720px;
     background-size: cover;
@@ -64,6 +66,7 @@ section {
 .card {
     height: 400px;
     width: calc(400px * 3 / 5);
+    background-color: gray;
     background-size: auto 100%;
     background-position: center;
     background-repeat: no-repeat;
