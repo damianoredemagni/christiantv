@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
-  async function loadSection(sectionId, jsonPath) {
+  async function loadShorts() {
     try {
-      const res = await fetch(jsonPath);
+      const res = await fetch("videos/shorts.json");
       if (!res.ok)
-        throw new Error(`Failed to fetch ${jsonPath}: ${res.status}`);
+        throw new Error(`Failed to fetch shorts.json: ${res.status}`);
       const videoIds = await res.json();
-      const container = document.querySelector(`#${sectionId} .container`);
+      const container = document.querySelector("#shorts .container");
       const isMobile = window.innerWidth <= 768;
 
       const videoPromises = videoIds.map(async (v) => {
         const oEmbedRes = await fetch(
-          `https://www.youtube.com/oembed?url=https://youtube.com/watch?v=${v.video_id}&format=json`,
+          `https://www.youtube.com/oembed?url=https://youtube.com/shorts/${v.video_id}&format=json`,
         );
         if (!oEmbedRes.ok)
           throw new Error(`Failed to fetch oEmbed for ${v.video_id}`);
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       container.innerHTML = videos
         .map(
           (v) => `
-        <div class="card landscape" style="background-image: url(${v.thumbnail_url})">
+        <div class="card portrait" style="background-image: url(${v.thumbnail_url})">
           <div class="area" data-video="${v.video_id}"
                ${isMobile ? "" : 'onmouseenter="playVideo(this)" onmouseleave="stopVideo(this)"'}
                onclick="goToDetails('${v.video_id}')"></div>
@@ -33,16 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
         )
         .join("");
     } catch (e) {
-      console.error(`Error loading section ${sectionId}: ${e}`);
+      console.error(`Error loading shorts: ${e}`);
     }
   }
 
-  function goToDetails(videoId) {
-    window.location.href = `details.html?id=${videoId}`;
-  }
-
-  loadSection("movies", "videos/movies.json");
-  loadSection("music", "videos/music.json");
-
-  window.goToDetails = goToDetails;
+  loadShorts();
 });

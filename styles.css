@@ -35,6 +35,8 @@ section {
     background: center / cover no-repeat;
     position: relative;
     flex-shrink: 0;
+    border-radius: 16px;
+    overflow: hidden;
 }
 .card iframe {
     width: 100%;
@@ -42,11 +44,11 @@ section {
     position: absolute;
     z-index: 1;
     opacity: 0;
-    transition: opacity 0.5s ease; /* Fade in */
+    transition: opacity 0.5s ease;
 }
 .card:hover iframe {
     opacity: 1;
-} /* Show on hover */
+}
 .area {
     width: 100%;
     height: 100%;
@@ -54,11 +56,20 @@ section {
     z-index: 2;
     cursor: pointer;
 }
+.info {
+    color: white;
+    padding: 8px 0;
+    z-index: 1;
+}
 
 /* Aspect Ratios */
 .landscape {
     width: 400px;
     height: calc(400px * 9 / 16);
+}
+.portrait {
+    width: 200px;
+    height: calc(200px * 16 / 9);
 }
 
 /* Hero Section */
@@ -86,8 +97,18 @@ section {
         width: 200px;
         height: calc(200px * 9 / 16);
     }
+    .portrait {
+        width: 100px;
+        height: calc(100px * 16 / 9);
+    }
     #hero .card {
         width: calc(100vw - 32px);
         height: calc((100vw - 32px) * 9 / 16);
+    }
+    #hero .info h2 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: calc(100vw - 64px);
     }
 }
